@@ -1,0 +1,17 @@
+﻿
+.reviews-content
+{
+    margin-top:20px;
+    margin-bottom:120px;
+}
+
+.photo-hightlight {
+    height: 50px !important;
+    width: 50px;
+    background-position: center center;
+    background-size: cover;
+    margin-left:10px;
+}
+.reviews-table-pagination {
+    margin-top: 40px;
+}

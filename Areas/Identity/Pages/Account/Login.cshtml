@@ -1,0 +1,75 @@
+﻿@page "/login"
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Connectez-vous !";
+}
+
+<div class="container">
+
+    <div class="row justify-content-center  LoginGrid">
+        <div class="col-12">
+            <h4 class="text-center"><img class="yaillo-login-logo" src="https://st6808.ispot.cc/media/yaillo.png" /></h4>
+        </div>
+        <div class="col-11 col-sm-8 col-md-6 col-lg-5 col-xl-5">
+
+            <section>
+
+                <form id="account" method="post" >
+                    
+                    <br />
+                    <br />
+                 <div asp-validation-summary="All" class="text-danger"></div>
+                    <br />
+                    <br />
+                    <div class="form-group">
+
+                        <input asp-for="Input.PhoneNumber" class="form-control LOGINFORM" placeholder="numéro de téléphone" autocomplete="off" />
+                        <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+
+                        <input asp-for="Input.Password" class="form-control LOGINFORM" placeholder="mot de passe" autocomplete="off" />
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <button id="btnLogin" type="submit" class="btn form-control">CONNEXION</button>
+                    </div>
+                     <div class="form-group">
+                    <p>
+                        <br/>
+                        <span>Vous n'avez pas de compte ? <a id="forgot-password"  href="/inscription/global" >Inscrivez-vous !</a></span>
+                    </p>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

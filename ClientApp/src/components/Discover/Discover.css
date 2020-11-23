@@ -1,0 +1,43 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+
+.discover-content{
+    margin-top:100px;
+    margin-bottom:30px;
+}
+.review-card {
+    height: auto;
+    border: 1px solid #dddddd;
+    padding: 10px;
+    margin-top: 15px;
+}
+.item-bg-2 {
+    height: 280px;
+    width: 100%;
+    background-size: cover;
+    background-position: center center;
+}
+
+.item-title-2 {
+    font-size: 14px;
+    font-weight: 400 !important;
+    font-family: 'Roboto', sans-serif !important;
+}
+
+.row-see-biz {
+    width: 100%;
+    background-color: #dbdbdb;
+    height:35px;
+    padding:5px;
+}
+
+.see-biz-text {
+    font-size: 15px;
+    font-weight: 500 !important;
+    font-family: 'Roboto', sans-serif !important;
+    color:#101010;
+}
+
+.see-biz-text:hover {
+    color: #fff;
+}

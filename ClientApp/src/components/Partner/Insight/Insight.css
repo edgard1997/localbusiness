@@ -1,0 +1,39 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+.insight-content
+{
+    margin-bottom:80px;
+}
+
+.insight-card {
+    height: 300px;
+    width: 100%;
+    margin-top: 40px;
+    padding-top:50px;
+}
+
+
+.total-visit-title {
+    color: #de2951;
+    font-size: 18px;
+    font-weight: 200 !important;
+    font-family: 'Roboto', sans-serif !important;
+}
+
+.total-visit-count {
+    color: #6c6c6c;
+    font-size: 50px;
+    margin-top:50px;
+    font-weight: 600 !important;
+    font-family: 'Roboto', sans-serif !important;
+}
+
+@media (max-width:768px) {
+
+    .insight-card {
+        height: 250px;
+        width: 100%;
+        margin-top: 40px;
+        padding-top: 50px;
+    }
+}

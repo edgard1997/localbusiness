@@ -1,0 +1,37 @@
+﻿import { createContext } from "react";
+
+const AccountContext = createContext({
+    firstName: '',
+    lastName: '',
+    address: '',
+    password: null,
+    phoneNumber: null,
+    email: null,
+    userId:null,
+    country: null,
+    city: null,
+    businessName: '',
+    businessType: '',
+    idCardNumber: null,
+    idBackPicture: null,
+    idFrontPicture: null,
+    addressError: false,
+    fnameError: false,
+    lnameError: false,
+    passwordError: false,
+    phoneNumberError: false,
+    businessNameError: false,
+    idCardNumberError: false,
+    idFrontPictureError: false,
+    idBackPictureError: false,
+    oldPassword: null,
+    newPassword: null,
+    confirmNewPassword: null,
+    oldPasswordError: false,
+    newPasswordError:false,
+    passwordsDontMatch:false,
+    aboutYou: null,
+    aboutYouError: false,
+});
+
+export default AccountContext;

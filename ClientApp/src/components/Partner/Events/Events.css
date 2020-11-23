@@ -1,0 +1,29 @@
+﻿
+.new-event-btn {
+    background-color: #de2951 !important;
+    color: white !important;
+    text-transform: none !important;
+    font-size: 15.5px !important;
+    width: auto;
+    margin-bottom: 50px !important;
+    height: 45px;
+    padding: 5px;
+}
+
+
+.events-content {
+    margin-top: 20px;
+    margin-bottom: 120px;
+}
+
+.photo-hightlight {
+    height: 50px !important;
+    width: 50px;
+    background-position: center center;
+    background-size: cover;
+    margin-left: 10px;
+}
+
+.events-table-pagination {
+    margin-top: 40px;
+}

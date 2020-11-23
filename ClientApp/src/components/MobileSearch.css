@@ -1,0 +1,149 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+
+/* Auto suggest */
+
+
+@media (max-width:768px){
+
+    .more-businesses-row {
+        margin-left: 2px !important;
+        margin-top:80px;
+    }
+
+    .item-search-container-2 {
+        padding: 2px;
+        margin-top: -8px;
+        width:100% !important;
+    }
+
+    .search_bar_container {
+        width: 120% !important;
+    }
+    .item-search-1 {
+        width: 120% !important;
+        height: 200px;
+        background-color: grey;
+        border-radius: 8px;
+        background-position: center center;
+        background-size: cover;
+    }
+
+
+    .biz-hightlight-rating-1 {
+        margin-left: 0px !important;
+        font-size: 20px !important;
+        margin-top: 2px !important;
+    }
+
+    .biz-hightlight-reviews-2 {
+        margin-left: 35px !important;
+        color: #808080;
+        font-size: 17px;
+        font-weight: 500 !important;
+        font-family: 'Roboto', sans-serif !important;
+    }
+
+    .more-businesses-row div span a {
+        color: #0c0c0c !important;
+        font-weight: 300 !important;
+        font-size: 16px !important;
+        font-family: "Roboto", sans-serif !important;
+    }
+
+    .all-cat-title {
+        color: #0c0c0c !important;
+        font-weight: 600 !important;
+        font-size: 17px !important;
+        font-family: "Roboto", sans-serif !important;
+    }
+
+    .search_container {
+        margin-left: -20px;
+        height: auto;
+        margin-top: 60px !important;
+        padding-bottom: 80px;
+        padding:15px;
+    
+    }
+
+    .react-autosuggest__container {
+        position: relative;
+    }
+
+    .react-autosuggest__input {
+        width: 100%;
+        height: 45px;
+        padding: 10px 20px 6px 15px;
+        font-weight: 500 !important;
+        font-family: "Roboto", sans-serif !important;
+        margin-top: 20px !important;
+        font-size: 16px;
+        border: 1px solid lightgrey;
+        border-radius: 2px;
+        box-shadow: none !important;
+    }
+
+        .react-autosuggest__input:focus {
+            outline: none;
+        }
+
+    .react-autosuggest__input {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    .react-autosuggest__suggestions-container {
+        display: none;
+    }
+
+    .react-autosuggest__container--open .react-autosuggest__suggestions-container {
+        position: relative;
+        width: 110%;
+        height: auto;
+        z-index: 0;
+        font-weight: 500 !important;
+        font-family: "Roboto", sans-serif !important;
+        font-size: 16px;
+        margin-top: 5px;
+        box-shadow: none !important;
+    
+    }
+
+
+    .react-autosuggest__suggestion--focused .highlight {
+        color: #120000;
+    }
+
+    .search_icon {
+        font-size: 25px;
+    }
+
+    .btn_search {
+        background-color: #de2951 !important;
+        height: 44px;
+        width: 100%;
+        margin-left: -10px;
+        color: #fff !important;
+        margin-top: 20px !important;
+    }
+
+}
+
+@media (max-width:320px) {
+
+
+    .biz-hightlight-rating-1 {
+        margin-left: 0px !important;
+        font-size: 20px !important;
+        margin-top: 2px !important;
+    }
+
+    .biz-hightlight-reviews-2 {
+        margin-left: 35px !important;
+        color: #808080;
+        font-size: 17px;
+        font-weight: 500 !important;
+        font-family: 'Roboto', sans-serif !important;
+    }
+}

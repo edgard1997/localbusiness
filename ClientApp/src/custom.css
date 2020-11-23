@@ -1,0 +1,23 @@
+/* Provide sufficient contrast against white background */
+a {
+    color: #c7264a;
+    text-decoration: none !important;
+}
+
+    a:hover {
+        color: #e34669;
+    }
+
+code {
+    color: #E01A76;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+body {
+    margin: 0;
+}

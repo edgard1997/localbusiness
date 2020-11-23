@@ -1,0 +1,55 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+
+.outer-mobile-container {
+    overflow-y: hidden !important;
+    overflow-x:hidden !important;
+}
+.mobile-container {
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+}
+
+
+.mobile-appbar {
+    height: 55px;
+    /*padding-top: 15px;*/
+    border-top: 0.7px solid #bababa;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 80 !important;
+    background-color: #fff;
+    margin: 0 auto;
+    padding-right: 20px;
+    overflow-y: hidden !important;
+    overflow-x: hidden !important;
+    padding-top: 2px;
+}
+
+.app-logo-img {
+    height: 60px;
+    width: 105px;
+}
+.mobile-logobar {
+    height: 65px;
+    border-bottom: 0.7px solid #bababa;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 80;
+    background-color: #fff;
+}
+
+.appbar-icon {
+    font-size: 25px !important;
+    color: #858585 !important;
+    font-weight:200 !important;
+}
+
+.active-appbar-icon {
+    color: #de2951 !important;
+    font-size: 25px !important;
+    font-weight: 200 !important;
+}
+
