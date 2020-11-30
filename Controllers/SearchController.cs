@@ -17,7 +17,7 @@ using NiceWixApp.Services;
 
 namespace NiceWixApp.Controllers
 {
- 
+
     [ApiController]
     public class SearchController : ControllerBase
     {
@@ -79,8 +79,8 @@ namespace NiceWixApp.Controllers
                 if (author != null)
                 {
                     var pics = _db.ReviewsImages.Where(x => x.AuthorId == author.Id && x.ReviewId == item.Id).Select(x => x.imageUrl).ToList();
-                 
-                    if(pics.ToList().Count() > 0)
+
+                    if (pics.ToList().Count() > 0)
                     {
                         list.Add(new ReviewViewModel
                         {
@@ -95,7 +95,7 @@ namespace NiceWixApp.Controllers
                             BizId = item.BusinessId,
                         });
                     }
-                    
+
                 }
 
             }
@@ -115,7 +115,7 @@ namespace NiceWixApp.Controllers
         {
 
             var sponsoredItems = _db.Users.Where(x => x.PremiumExpirationDate >= DateTime.Now && x.City.ToUpper() == city.ToUpper()).OrderBy(x => Guid.NewGuid()).Take(4).ToList();
-            var items = _db.Users.Where(x => ( x.BusinessName.ToUpper().Contains(query.ToUpper()) && x.City.ToUpper() == city.ToUpper()) || (x.BusinessDescription.ToUpper().Contains(query.ToUpper()) && x.City.ToUpper() == city.ToUpper()) ).Skip(skip).Take(10).ToList();
+            var items = _db.Users.Where(x => (x.BusinessName.ToUpper().Contains(query.ToUpper()) && x.City.ToUpper() == city.ToUpper()) || (x.BusinessDescription.ToUpper().Contains(query.ToUpper()) && x.City.ToUpper() == city.ToUpper())).Skip(skip).Take(10).ToList();
             var premium = GetPremiumList(sponsoredItems, latitude, longitude);
             var standard = GetStandardList(items, latitude, longitude);
             foreach (var stand in standard.ToList())
@@ -125,7 +125,7 @@ namespace NiceWixApp.Controllers
                     standard.Remove(stand);
                 }
             }
-            var totalCount = standard.Count();
+            var totalCount = _db.Users.Where(x => (x.BusinessName.ToUpper().Contains(query.ToUpper()) && x.City.ToUpper() == city.ToUpper()) || (x.BusinessDescription.ToUpper().Contains(query.ToUpper()) && x.City.ToUpper() == city.ToUpper())).ToList().Count(); 
             var converted = Convert.ToDouble(totalCount);
             double res = converted / 10;
             double pages = Math.Ceiling(res);
@@ -146,7 +146,7 @@ namespace NiceWixApp.Controllers
         public SearchResult GetSuggestions(string query, double latitude, double longitude, string city)
         {
 
-            var items = _db.Users.Where(x => (x.BusinessName.ToUpper().Contains(query.ToUpper()) && x.City.ToUpper() == city.ToUpper()) || ( x.BusinessDescription.ToUpper().Contains(query.ToUpper()) && x.City.ToUpper() == city.ToUpper())).Take(4).ToList();
+            var items = _db.Users.Where(x => (x.BusinessName.ToUpper().Contains(query.ToUpper()) && x.City.ToUpper() == city.ToUpper()) || (x.BusinessDescription.ToUpper().Contains(query.ToUpper()) && x.City.ToUpper() == city.ToUpper())).Take(4).ToList();
 
             var standard = GetStandardList(items, latitude, longitude);
 
@@ -164,17 +164,17 @@ namespace NiceWixApp.Controllers
         {
 
             var sponsoredItems = _db.Users.Where(x => x.PremiumExpirationDate >= DateTime.Now && x.City.ToUpper() == city.ToUpper()).OrderBy(x => Guid.NewGuid()).Take(4).ToList();
-            var items = _db.Users.Where(x =>  x.BusinessType == category && x.City.ToUpper() == city.ToUpper()).Skip(skip).Take(10).ToList();
+            var items = _db.Users.Where(x => x.BusinessType == category && x.City.ToUpper() == city.ToUpper()).Skip(skip).Take(10).ToList();
             var premium = GetPremiumList(sponsoredItems, latitude, longitude);
             var standard = GetStandardList(items, latitude, longitude);
-            foreach (var stand in standard.ToList()) 
+            foreach (var stand in standard.ToList())
             {
-               if(premium.Any( x => x.Id == stand.Id))
+                if (premium.Any(x => x.Id == stand.Id))
                 {
                     standard.Remove(stand);
                 }
             }
-            var totalCount = standard.Count();
+            var totalCount = _db.Users.Where(x => x.BusinessType == category && x.City.ToUpper() == city.ToUpper()).ToList().Count(); 
             var converted = Convert.ToDouble(totalCount);
             double res = converted / 10;
             double pages = Math.Ceiling(res);
@@ -193,38 +193,41 @@ namespace NiceWixApp.Controllers
 
         [HttpGet("/search/filters/{category}/{city}/{query}/{skip}/{openNow}/{freeWifi}/{creditCard}/{parKing}/{homeService}/{hasToilets}/{latitude}/{longitude}/{inTheBlock}/{nearby}/{inTheTown}/{inTheCity}")]
         public SearchResult SearchWithFilters(
-        int category, string city, string query, int skip, bool openNow, bool freeWifi, bool creditCard, bool parKing, bool homeService, bool hasToilets, double latitude, double longitude, bool inTheBlock, bool nearby, bool inTheTown,bool inTheCity)
+        int category, string city, string query, int skip, bool openNow, bool freeWifi, bool creditCard, bool parKing, bool homeService, bool hasToilets, double latitude, double longitude, bool inTheBlock, bool nearby, bool inTheTown, bool inTheCity)
         {
             SearchFilter filters = new SearchFilter
             {
-                 Category = category,
-                 Query = query,
-                 Skip = skip,
-                 CreditCard = creditCard,
-                 FreeWifi = freeWifi,
-                 HasToilets = hasToilets,
-                 HomeService = homeService,
-                 InTheBlock = inTheBlock,
-                 InTheCity = inTheCity,
-                 InTheTown= inTheTown,
-                 Latitude = latitude,
-                 Longitude = longitude,
-                 Nearby = nearby,
-                 OpenNow = openNow,
-                 ParKing = parKing
+                Category = category,
+                Query = query,
+                Skip = skip,
+                CreditCard = creditCard,
+                FreeWifi = freeWifi,
+                HasToilets = hasToilets,
+                HomeService = homeService,
+                InTheBlock = inTheBlock,
+                InTheCity = inTheCity,
+                InTheTown = inTheTown,
+                Latitude = latitude,
+                Longitude = longitude,
+                Nearby = nearby,
+                OpenNow = openNow,
+                ParKing = parKing
             };
 
             var sponsoredItems = _db.Users.Where(x => x.PremiumExpirationDate >= DateTime.Now && x.City.ToUpper() == city.ToUpper()).OrderBy(x => Guid.NewGuid()).Take(4).ToList();
 
             List<ApplicationUser> items = new List<ApplicationUser>();
 
-            if(filters.Category == 0)
+            var totalCount = 0;
+            if (filters.Category == 0)
             {
-                items = _db.Users.Where(x => ( x.BusinessName.ToUpper().Contains(filters.Query.ToUpper()) && x.City.ToUpper() == city.ToUpper() ) ||  ( x.BusinessDescription.ToUpper().Contains(filters.Query.ToUpper()) && x.City.ToUpper() == city.ToUpper()) ).Skip(filters.Skip).Take(15).ToList();
+                items = _db.Users.Where(x => (x.BusinessName.ToUpper().Contains(filters.Query.ToUpper()) && x.City.ToUpper() == city.ToUpper()) || (x.BusinessDescription.ToUpper().Contains(filters.Query.ToUpper()) && x.City.ToUpper() == city.ToUpper())).Skip(filters.Skip).Take(10).ToList();
+                totalCount = _db.Users.Where(x => (x.BusinessName.ToUpper().Contains(filters.Query.ToUpper()) && x.City.ToUpper() == city.ToUpper()) || (x.BusinessDescription.ToUpper().Contains(filters.Query.ToUpper()) && x.City.ToUpper() == city.ToUpper())).ToList().Count();
             }
             else
             {
-                 items = _db.Users.Where(x => x.BusinessType == filters.Category && x.City.ToUpper() == city.ToUpper()).Skip(filters.Skip).Take(15).ToList();
+                items = _db.Users.Where(x => x.BusinessType == filters.Category && x.City.ToUpper() == city.ToUpper()).Skip(filters.Skip).Take(10).ToList();
+                totalCount = _db.Users.Where(x => x.BusinessType == filters.Category && x.City.ToUpper() == city.ToUpper()).ToList().Count();
             }
 
 
@@ -237,9 +240,9 @@ namespace NiceWixApp.Controllers
                     standard.Remove(stand);
                 }
             }
-            var totalCount = standard.Count();
+           
             var converted = Convert.ToDouble(totalCount);
-            double res = converted / 15;
+            double res = converted / 10;
             double pages = Math.Ceiling(res);
 
             SearchResult result = new SearchResult
@@ -258,7 +261,7 @@ namespace NiceWixApp.Controllers
         public Biz BizDetails(string id)
         {
             var business = _db.Users.Find(id);
-            if(business == null)
+            if (business == null)
             {
                 return null;
             }
@@ -334,7 +337,7 @@ namespace NiceWixApp.Controllers
                 {
                     services.Add(new BizService { Name = am.FrenchName, Checked = true, AmenitieId = am.Id });
                 }
-          
+
             };
 
 
@@ -342,30 +345,30 @@ namespace NiceWixApp.Controllers
             var converted = Convert.ToDouble(galleryCount);
             double res = converted / 12;
             double pages = Math.Ceiling(res);
-            var hours = _db.UsersHours.Where(x => x.UserId == business.Id).OrderBy( x => x.DayId ).ToList();
+            var hours = _db.UsersHours.Where(x => x.UserId == business.Id).OrderBy(x => x.DayId).ToList();
             List<TimeTable> table = new List<TimeTable>();
             foreach (var item in hours)
             {
-                table.Add(new TimeTable { 
-                  UserId = business.Id,
-                  DayId = item.DayId,
-                  From = item.From,
-                  IsOpened = item.IsOpened,
-                  To = item.To,
-                  Day = _db.DaysOfTheWeek.FirstOrDefault( x => x.Id == item.DayId).Name,
+                table.Add(new TimeTable {
+                    UserId = business.Id,
+                    DayId = item.DayId,
+                    From = item.From,
+                    IsOpened = item.IsOpened,
+                    To = item.To,
+                    Day = _db.DaysOfTheWeek.FirstOrDefault(x => x.Id == item.DayId).Name,
                 });
 
             }
 
-            var reviews = _db.Reviews.Where(x => x.BusinessId == business.Id).OrderByDescending( x => x.Date ).Take(12).ToList();
+            var reviews = _db.Reviews.Where(x => x.BusinessId == business.Id).OrderByDescending(x => x.Date).Take(12).ToList();
 
             List<ReviewViewModel> list = new List<ReviewViewModel>();
             foreach (var item in reviews)
             {
                 var author = _db.Users.Find(item.AuthorId);
-                if(author != null)
+                if (author != null)
                 {
-                    var pics = _db.ReviewsImages.Where(x => x.AuthorId == author.Id && x.ReviewId == item.Id ).Select( x => x.imageUrl ).ToList();
+                    var pics = _db.ReviewsImages.Where(x => x.AuthorId == author.Id && x.ReviewId == item.Id).Select(x => x.imageUrl).ToList();
 
                     list.Add(new ReviewViewModel
                     {
@@ -395,8 +398,8 @@ namespace NiceWixApp.Controllers
                 OpeningHours = table,
                 Reviews = list,
                 Joined = business.Creation.ToString("dd/MM/yyyy"),
-                HightLight = _db.Photos.Where( x => x.UserId == business.Id ).OrderByDescending( x => x.Date ).Take(4).Select( x => x.Url ).ToList(),
-                
+                HightLight = _db.Photos.Where(x => x.UserId == business.Id).OrderByDescending(x => x.Date).Take(4).Select(x => x.Url).ToList(),
+
             };
 
             return model;
@@ -411,7 +414,7 @@ namespace NiceWixApp.Controllers
             var converted = Convert.ToDouble(totalCount);
             double result = converted / 12;
             double pages = Math.Ceiling(result);
-            var photos = _db.Photos.Where(x => x.UserId == bizId).Skip(skip).Take(12);
+            var photos = _db.Photos.Where(x => x.UserId == bizId).Skip(skip).Take(12).ToList();
 
             List<OwnedPhoto> pics = new List<OwnedPhoto>();
             foreach (var item in photos)
@@ -442,13 +445,13 @@ namespace NiceWixApp.Controllers
         {
             var biz = _db.Users.Find(bizId);
 
-            if(biz == null)
+            if (biz == null)
             {
                 return BadRequest();
             }
 
             biz.TotalVisitCount = biz.TotalVisitCount + 1;
-           
+
             _db.Users.Update(biz);
             _db.SaveChanges();
 
@@ -537,7 +540,7 @@ namespace NiceWixApp.Controllers
                     Lat = item.Lat,
                     Long = item.Long,
                     ReviewsCount = item.TotalReviewsCount,
-                    Status = Tools.GetOpeningStatus(time.From,time.To, nextDayStarTime, item.TimeZone, time.IsOpened, isOpenNow, isNextDayOpened),
+                    Status = Tools.GetOpeningStatus(time.From, time.To, nextDayStarTime, item.TimeZone, time.IsOpened, isOpenNow, isNextDayOpened),
                     UrlsPictures = photos,
                     Verified = item.BusinessVerified,
                 }
@@ -630,7 +633,7 @@ namespace NiceWixApp.Controllers
                     Lat = item.Lat,
                     Long = item.Long,
                     ReviewsCount = item.TotalReviewsCount,
-                    Status = Tools.GetOpeningStatus(time.From,time.To, nextDayStarTime, item.TimeZone, time.IsOpened, isOpenNow, isNextDayOpened),
+                    Status = Tools.GetOpeningStatus(time.From, time.To, nextDayStarTime, item.TimeZone, time.IsOpened, isOpenNow, isNextDayOpened),
                     UrlsPictures = photos,
                     Verified = item.BusinessVerified,
                 }
@@ -672,10 +675,10 @@ namespace NiceWixApp.Controllers
                      UnitOfLength.Kilometers
                  );
 
-                if(distance > 5)
-                 {
+                    if (distance > 5)
+                    {
                         items.Remove(item);
-                 }
+                    }
 
                 }
             }
@@ -734,8 +737,8 @@ namespace NiceWixApp.Controllers
             {
                 foreach (var item in items.ToList())
                 {
-                   
-                    if (!_db.UsersAmenities.Any( x => x.AmenitieId == 10 && x.UserId == item.Id))
+
+                    if (!_db.UsersAmenities.Any(x => x.AmenitieId == 10 && x.UserId == item.Id))
                     {
                         items.Remove(item);
                     }
@@ -795,13 +798,13 @@ namespace NiceWixApp.Controllers
                 foreach (var item in items.ToList())
                 {
 
-                    if (_db.UsersHours.Any( x => x.UserId == item.Id) )
+                    if (_db.UsersHours.Any(x => x.UserId == item.Id))
                     {
-                        if(_db.UsersHours.FirstOrDefault(x => x.UserId == item.Id).IsOpened == false)
+                        if (_db.UsersHours.FirstOrDefault(x => x.UserId == item.Id).IsOpened == false)
                         {
-                                items.Remove(item);
+                            items.Remove(item);
                         }
-                      
+
                     }
                     else
                     {
@@ -893,16 +896,16 @@ namespace NiceWixApp.Controllers
                 var startMinutes = startTime.Substring(startTime.Length - 2);
                 var endHour = new string(endTime.Take(2).ToArray());
                 var endMinutes = endTime.Substring(endTime.Length - 2);
-                var startDate = new DateTime(LocalNow.Year, LocalNow.Month, LocalNow.Day, Convert.ToInt32(startHour), Convert.ToInt32(startMinutes), 0);
-                var endDate = new DateTime(LocalNow.Year, LocalNow.Month, LocalNow.Day, Convert.ToInt32(endHour), Convert.ToInt32(endMinutes), 0);
-                var LocalOpening = Tools.GetLocalOpening(timezone, startDate);
-                var LocalClosing = Tools.GetLocalOpening(timezone, endDate);
+                var start = new DateTime(LocalNow.Year, LocalNow.Month, LocalNow.Day, Convert.ToInt32(startHour), Convert.ToInt32(startMinutes), 0);
+                var end = new DateTime(LocalNow.Year, LocalNow.Month, LocalNow.Day, Convert.ToInt32(endHour), Convert.ToInt32(endMinutes), 0);
+                //var LocalOpening = Tools.GetLocalOpening(timezone, startDate);
+                //var LocalClosing = Tools.GetLocalOpening(timezone, endDate);
 
-                if (LocalOpening < LocalClosing && LocalOpening < LocalNow && LocalNow < LocalClosing)// opened now at daytime
+                if(start < end && start < LocalNow && LocalNow < end)// opened now at daytime
                 {
                     return true;
                 }
-                if (LocalOpening > LocalClosing && LocalNow > LocalOpening && LocalNow < LocalClosing)// opened now overnight
+                if (start > end && LocalNow > start || start > end && LocalNow < start )// opened now overnight
                 {
                     return true;
                 }

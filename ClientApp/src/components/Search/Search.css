@@ -1,7 +1,6 @@
 ﻿@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 
-
 .desktop-friendly-search-content {
     display:block;
 }
@@ -353,24 +352,6 @@
     }
 }
 
-@media (max-width:320px) {
-
-
-    .biz-hightlight-rating-1 {
-        margin-left: 0px !important;
-        font-size: 20px !important;
-        margin-top: 2px !important;
-    }
-
-    .biz-hightlight-reviews-1 {
-        margin-left: 25px !important;
-        color: #808080;
-        font-size: 17px;
-        font-weight: 500 !important;
-        font-family: 'Roboto', sans-serif !important;
-    }
-}
-
 
 /* Business style */
 .biz-container {
@@ -459,8 +440,8 @@
     margin-right: 5px;
 }
 
-.btn-call-whatsapp-biz {
-    background-color: #075E54 !important;
+.btn-call-biz {
+    background-color: #de2951 !important;
     color: white !important;
     text-transform: none !important;
     font-size: 16px !important;
@@ -650,14 +631,14 @@
         margin-left:2px;
     }
 
-    .btn-call-whatsapp-biz {
-        background-color: #075E54 !important;
+    .btn-call-biz {
+        background-color: #de2951 !important;
         color: white !important;
         text-transform: none !important;
         font-size: 16px !important;
-        width:100%;
-        margin-bottom:20px !important;
-        margin-left:10px !important;
+        width: 100%;
+        margin-bottom: 20px !important;
+        margin-left: 10px !important;
     }
 
     .btn-save-biz {
@@ -874,6 +855,15 @@
         margin-left: 6px;
     }
 
+    .biz-hightlight-reviews-1 {
+        font-size: 18px !important;
+        font-weight: 400 !important;
+        font-family: 'Roboto', sans-serif !important;
+        margin-top: 8px !important;
+        color: #4e4e4e;
+        margin-left: 2px !important;
+    }
+
 
     .biz-hightlight-rating-2 {
         font-size: 21px !important;
@@ -905,6 +895,24 @@
         margin-left: 25px !important;
         color: #808080;
         font-size: 13px;
+        font-weight: 500 !important;
+        font-family: 'Roboto', sans-serif !important;
+    }
+}
+
+@media (max-width:320px) {
+
+
+    .biz-hightlight-rating-1 {
+        margin-left: 0px !important;
+        font-size: 20px !important;
+        margin-top: 2px !important;
+    }
+
+    .biz-hightlight-reviews-1 {
+        margin-left: 25px !important;
+        color: #808080;
+        font-size: 17px;
         font-weight: 500 !important;
         font-family: 'Roboto', sans-serif !important;
     }

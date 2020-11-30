@@ -15,17 +15,25 @@ namespace NiceWixApp.Services
         {
             DateTime serverTime = DateTime.Now;
 
-            DateTime _localTime = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(serverTime, TimeZoneInfo.Local.Id, timezone);
+           //DateTime _localTime = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(serverTime, TimeZoneInfo.Local.Id, timezone);
+            DateTime utcTime = serverTime.ToUniversalTime(); 
+
+            TimeZoneInfo tzi = TimeZoneInfo.FindSystemTimeZoneById(timezone);
+            DateTime _localTime = TimeZoneInfo.ConvertTimeFromUtc(utcTime, tzi);
 
             return _localTime;
         }
 
         public static DateTime GetLocalOpening(string timezone, DateTime date)
         {
-           
-            DateTime _time = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(date, TimeZoneInfo.Local.Id, timezone);
 
-            return _time;
+            //DateTime _time = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(date, TimeZoneInfo.Local.Id, timezone);
+            DateTime utcTime = date.ToUniversalTime();
+
+            TimeZoneInfo tzi = TimeZoneInfo.FindSystemTimeZoneById(timezone);
+            DateTime _local = TimeZoneInfo.ConvertTimeFromUtc(utcTime, tzi);
+
+            return _local;
         }
 
         public static string GetTime(DateTime date, string zone)
@@ -336,8 +344,8 @@ namespace NiceWixApp.Services
                 var endMinutes = EndTime.Substring(EndTime.Length - 2);
                 var startDate = new DateTime(LocalNow.Year, LocalNow.Month, LocalNow.Day, Convert.ToInt32(startHour), Convert.ToInt32(startMinutes),0);
                 var endDate = new DateTime(LocalNow.Year, LocalNow.Month, LocalNow.Day, Convert.ToInt32(endHour), Convert.ToInt32(endMinutes), 0);
-                var LocalOpening = GetLocalOpening(timezone, startDate);
-                var LocalClosing = GetLocalOpening(timezone, endDate);
+                var LocalOpening = startDate; //GetLocalOpening(timezone, startDate);
+                var LocalClosing = endDate;//GetLocalOpening(timezone, endDate);
 
                 if(isOpenNow)
                 {
@@ -345,11 +353,13 @@ namespace NiceWixApp.Services
                     {
                         return $"Ouvert jusqu'à {EndTime}";
                     }
-                    if (LocalOpening > LocalClosing && LocalNow > LocalOpening && LocalNow < LocalClosing)// opened now overnight
+                    if (LocalOpening > LocalClosing && LocalNow > LocalOpening || LocalOpening > LocalClosing && LocalNow < LocalClosing)// opened now overnight
                     {
                         return $"Ouvert jusqu'à {EndTime}";
                     }
                 }
+
+
 
                 if (LocalOpening < LocalClosing && LocalOpening > LocalNow && LocalNow < LocalClosing || LocalOpening > LocalClosing && LocalOpening > LocalNow )// open this morning or in the evening.
                 {
@@ -483,7 +493,7 @@ namespace NiceWixApp.Services
                 Console.WriteLine($"Upload File Complete, status {response.StatusDescription}");
             }
 
-            string baseUrl = "http://st6808.ispot.cc/media/";
+            string baseUrl = "https://st6808.ispot.cc/media/";
 
             return $"{baseUrl}{fileName}";
         }

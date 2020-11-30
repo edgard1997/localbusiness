@@ -142,6 +142,7 @@ export default function Search() {
                 .then(response => response.json())
                 .then(result => {
                     setData(result);
+                    setPage(result.pages);
                     var array = [...places];
 
                     array.push({ title: 'Votre position', lat: params.latitude, long: params.longitude, sponsored: false, home: true });
@@ -173,6 +174,7 @@ export default function Search() {
                 .then(response => response.json())
                 .then(result => {
                     setData(result);
+                         setPage(result.pages);
                     var array = [...places];
                     
                     array.push({ title: 'Votre position', lat: params.latitude, long: params.longitude, sponsored: false, home: true })
@@ -259,7 +261,7 @@ export default function Search() {
 
     const changePageWithFilter = (event, value) => {
 
-        var toSkip = 24 * (value - 1);
+        var toSkip = 10 * (value - 1);
 
         var depthEnd = data.totalCount - toSkip;
 
@@ -278,7 +280,7 @@ export default function Search() {
 
     const changePage = (event, value) => {
 
-        var toSkip = 24 * (value - 1);
+        var toSkip = 10 * (value - 1);
 
         var depthEnd = data.totalCount - toSkip;
 
@@ -339,6 +341,25 @@ export default function Search() {
                     setData(result);
                     setPage(result.pages);
                     setCurrentPage(value);
+                    var array = [...places];
+                    array.forEach((item, i) => {
+                        if (array.length > 2) {
+                            array.pop(item);
+                        }
+                    });
+                    if (result.items.length > 0) {
+
+                        result.items.forEach((item, i) => { array.push({ title: item.businessName, lat: item.lat, long: item.long, sponsored: false, home: false }) });
+
+                    }
+
+                    if (result.sponsoredItems.length > 0) {
+
+                        result.sponsoredItems.forEach((item, i) => { array.push({ title: item.businessName, lat: item.lat, long: item.long, sponsored: true, home: false }) });
+
+                    }
+
+                    setPlaces(array);
                     setReady(true);
                 }).catch(error => console.log(error));
         }
@@ -417,7 +438,7 @@ export default function Search() {
                 <div className='item-search' style={{ 'backgroundImage': `url(${props.biz.urlsPictures[0]})` }} >
                 </div>
                 <div className='row'>
-                 <div className='col-3 col-sm-3 col-md-2 col-lg-4'>
+                        <div className='col-4 col-sm-3 col-md-4 col-lg-4'>
                                  <Rating
                                         name="read-only"
                                         value={props.biz.rating}
@@ -426,7 +447,7 @@ export default function Search() {
                             className='biz-hightlight-rating-1'
                                     />
                                 </div>
-                    <div className='col-3 col-sm-2'>
+                        <div className='col-3 col-sm-2'>
                         <span  className='biz-hightlight-reviews-1' >{props.biz.reviewsCount}</span>
                     </div>
                     <div className='col-12'>
@@ -441,11 +462,46 @@ export default function Search() {
        
     }
 
+    //function Item3() {
+
+
+    //    return (
+    //        <div className='col-11 col-sm-6 col-md-6 item-search-container'>
+                
+    //            <h5 >Le Marylin's</h5>
+    //            <div style={{ cursor: `pointer` }} >
+    //                <div className='item-search' style={{ 'backgroundImage': `url(${''})` }} >
+    //                </div>
+    //                <div className='row'>
+    //                    <div className='col-4 col-sm-3 col-md-4 col-lg-4'>
+    //                        <Rating
+    //                            name="read-only"
+    //                            value={0}
+    //                            precision={0.5}
+    //                            readOnly
+    //                            className='biz-hightlight-rating-1'
+    //                        />
+    //                    </div>
+    //                    <div className='col-3 col-sm-2'>
+    //                        <span className='biz-hightlight-reviews-1' >0</span>
+    //                    </div>
+    //                    <div className='col-12'>
+    //                        <ImLocation className="street-location-icon" />
+    //                            <span className='street-location'>85 Rue Dominique Savio Primaire, Bonapriso</span>
+    //                    </div>
+
+    //                </div>
+    //            </div>
+    //        </div>);
+
+
+    //}
+
     return (
         <>
             <div className='desktop-friendly-search-content'>
                 <div className='map-container'>
-                    <YailloMap items={places} />
+                    <YailloMap items={places} city={city} />
                 </div>
                 <div className='container search-container'>
                     <div className='row'>
@@ -686,11 +742,11 @@ export default function Search() {
                                             <h4 className='search-main-title'>Résultats pour la recherche '{params.query}'</h4>
                                             {data.sponsoredItems.map((biz, i) => (<Item key={i} biz={biz} premium={true} />))}
                                             {data.items.map((biz, i) => (<Item key={i} biz={biz} premium={false} />))}
-                                            {pages > 10 ? <div className='row search-pagination'>
+                                            <div className='row search-pagination'>
                                                 <div className='col-8 col-sm-8 col-md-6 col-lg-6 col-xl-6' >
                                                     {filtered ? <Pagination count={pages} shape="rounded" page={currentPage} onChange={changePageWithFilter} /> : <Pagination count={pages} shape="rounded" page={currentPage} onChange={changePage} />}
                                                 </div>
-                                            </div> : null}
+                                            </div>
 
                                         </>)
                                     }
@@ -703,7 +759,7 @@ export default function Search() {
             </div>
             <div className='mobile-friendly-search-content'>
                 <div className='map-container'>
-                    <YailloMap items={places} />
+                    <YailloMap items={places} city={city} />
                 </div>
                 <div className='container-fluid'>
                     <div className='row justify-content-center'>
@@ -717,7 +773,7 @@ export default function Search() {
                                                 {data.sponsoredItems.map((biz, i) => (<Item2 key={i} biz={biz} premium={true} />))}
                                                 {data.items.map((biz, i) => (<Item2 key={i} biz={biz} premium={false} />))}
                                             </div>
-                                            {pages > 10 ? <div className='row search-pagination'>
+                                            {pages > 1 ? <div className='row search-pagination'>
                                                 <div className='col-8 col-sm-8 col-md-6 col-lg-6 col-xl-6' >
                                                     {filtered ? <Pagination count={pages} shape="rounded" page={currentPage} onChange={changePageWithFilter} /> : <Pagination count={pages} shape="rounded" page={currentPage} onChange={changePage} />}
                                                 </div>
@@ -762,7 +818,6 @@ function GetMarker(props){
         iconSize: [40, 40],
     });
 
-
     if (props.sponsored && !props.home) {
         return (<Marker position={location} icon={pointerIcon2}  >
             <Popup>
@@ -799,18 +854,26 @@ function YailloMap(props) {
         return (<></>);
     }
 
-    const place1 = [props.items[1].lat, props.items[1].long];
-   
-   
+    var city = getCityLocation(props.city);
+    const cityPointer = [city.lat, city.long];
+
     return (
-        props.items.length > 1 ? (<MapContainer center={place1} zoom={12} >
+        props.items.length > 1 ? (<MapContainer center={cityPointer} zoom={11} >
             <TileLayer
                 attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            {props.items.map((item, i) => (
-                <GetMarker key={i} title={item.title} lat={item.lat} long={item.long} home={item.home} sponsored={item.sponsored} />
-            ))}
+            {props.items.map((item, i) => {
+
+                if (i === 0)
+                    return <></>;
+                else {
+
+                    return (
+                        <GetMarker key={i} title={item.title} lat={item.lat} long={item.long} home={item.home} sponsored={item.sponsored} />
+                    );
+                }
+            })}
         </MapContainer>) : null);
 
 }
@@ -872,3 +935,48 @@ const businessTypes = [
     'Événementiel',
     'Experts en Marketing'
 ];
+
+function getCityLocation(city) {
+    var coords = {name: "douala", lat: 4.062305083946346, long: 9.703938593214488 };
+    if (city === null || city === undefined) {
+        return coords;
+    }
+
+    cities.forEach((item, i) => {
+        if (item.name === city) {
+            coords.name = item.name;
+            coords.lat = item.lat;
+            coords.long = item.long;
+       
+        }
+    });
+
+    return coords;
+  
+}
+
+const cities = [{ name: "abidjan", lat: 5.352544812365578, long: -4.004860745800187 },
+    { name: "bouake", lat: 7.688339564187033, long: -5.036736179883731 } ,
+    { name: "yamoussoukro", lat: 6.809840489751288, long: -5.269894608870574 },
+    { name: "khorogo", lat: 9.456735048100457, long: -5.629878608479587 },
+    { name: "dakar", lat: 14.717323095145671, long: -17.454154516856853 },
+    { name: "conakry", lat: 9.633541195419113, long: -13.590319948600932 },
+    { name: "bamako", lat: 12.642599566899445, long: -7.991114659917241 },
+    { name: "lome", lat: 6.1613624058397205, long: 1.2405892790508868 } ,
+    { name: "ouagadougou", lat: 12.370220648256087, long: -1.5200229922878434 },
+    { name: "cotonou", lat: 6.36692048301572, long: 2.396236703126107 },
+    { name: "porto-novo", lat: 6.493903477075459, long: 2.625388474194161 },
+    { name: "abomey-calavi", lat: 6.452623721933518, long: 2.3450767966156008 },
+    { name: "libreville", lat: 0.4193636987434619, long: 9.435227890895845 },
+    { name: "oyem", lat: 1.6018101380486647, long: 11.572948490543434 },
+    { name: "brazzaville", lat: -4.272004588889839, long: 15.266660387745482 },
+    { name: "pointe-noire", lat: -4.792116273556241, long: 11.883170453105757 },
+    { name: "kinshasa", lat: -4.34952422572521, long: 15.301026987861722 },
+    { name: "lumumbashi", lat: -11.661545500645262, long: 27.49008611213785 },
+    { name: "douala", lat: 4.062305083946346, long: 9.703938593214488 },
+    { name: "yaounde", lat: 3.8673403875822707, long: 11.517274159192299 },
+    { name: "garoua", lat: 9.330864539426793, long: 13.39450055250033 },
+    { name: "bafoussam", lat: 5.47753450256532, long: 10.416055375634397},
+    { name: "limbe", lat: 4.02097404086149, long: 9.18596491957453 },
+    { name: "kribi", lat: 2.939890512370546, long: 9.908058513480249 },
+]

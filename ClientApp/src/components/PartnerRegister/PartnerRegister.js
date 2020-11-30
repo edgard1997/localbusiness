@@ -378,10 +378,10 @@ export default function PartnerRegister() {
                     <p>*Paiement requis 7 jours après inscription.</p>
                     <div className='row' >
                         <div class="col-12 col-md-8 col-lg-8">
-                            <img title="Orange money" className='img-pay-method' src="https://davidcalmel.com/wp-content/uploads/2017/11/orange-money.jpg" />
-                            <img title="MTN mobile money" className='img-pay-method' src="https://beninonweb.com/wp-content/uploads/2016/10/mtn-mobile-money-benin.jpg" />
-                            <img title="Moov money" className='img-pay-method' src="https://onloutou.com/o2t-boutique/images/moov.png" />
-                            <img title="Airtel money" className='img-pay-method' src="https://i.pinimg.com/474x/18/56/24/1856244f4661f38bfb934963217d2360.jpg" />
+                            <img title="Orange money" className='img-pay-method' src="https://st6808.ispot.cc/media/orangemoney.jpg" />
+                            <img title="MTN mobile money" className='img-pay-method' src="https://st6808.ispot.cc/media/mtnmobile.jpg" />
+                            <img title="Moov money" className='img-pay-method' src="https://st6808.ispot.cc/media/moov.png" />
+                            <img title="Airtel money" className='img-pay-method' src="https://st6808.ispot.cc/media/airtel.jpg" />
                         </div>
                     </div>
                 </div>

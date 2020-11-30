@@ -230,7 +230,7 @@ export default function Accueil() {
     const [model, setModel] = useState(null);
 
     useEffect(() => {
-
+        
         if (city === undefined || city === null) {
 
             fetch(`${GetApi.GetSuggestions}/douala`, {

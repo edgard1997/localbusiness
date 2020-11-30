@@ -467,9 +467,9 @@ export default function Biz() {
         var home = [dataContext.lat, dataContext.long];
 
 
-        return (<MapContainer center={location} zoom={12}>
+        return (<MapContainer center={location} zoom={11}>
                 <TileLayer
-                    attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                    attribution='&amp;copy <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
                 <Marker position={home} icon={homeIcon}  >
@@ -603,9 +603,7 @@ export default function Biz() {
                             </div>
                             <div className='col-12'>
                                 <div className='actions-buttons-div'>
-                                    <Button variant="contained" onClick={() => {
-                                        openInNewTab(`https://wa.me/${data.bizPhoneNumber}`);
-                                    }} startIcon={<ImWhatsapp />} className='btn-call-whatsapp-biz' >WhatsApp</Button>
+                                    <Button variant="contained" href={`tel:${data.bizPhoneNumber}`}  startIcon={<FiPhoneCall />} className='btn-call-biz' >Contacter</Button>
                                     {profile === null ?
 
                                         (<>
@@ -692,12 +690,11 @@ export default function Biz() {
                     </div>
                     <div className='email-n-phone'>
                         <div className='row justify-content-center'>
-                            <div className='col-12 email-n-phone-1' >
-                                <FaExternalLinkAlt style={{ fontSize: `21px` }} /> <a href={`mailto:${data.bizEmailAddress}`} className='email-n-phone-link' > {data.bizEmailAddress}</a>
-                            </div>
-                            <div className='col-12 email-n-phone-2' >
-                                <FiPhoneCall style={{ fontSize: `21px` }} /> <a href={`tel:${data.bizPhoneNumber}`} className='email-n-phone-link' >{data.bizPhoneNumber}</a>
-                            </div>
+                            {
+                                data.bizEmailAddress === "default@gmail.com" || data.bizEmailAddress === null ? null : (<div className='col-12 email-n-phone-1' >
+                                    <FaExternalLinkAlt style={{ fontSize: `21px` }} /> <a href={`mailto:${data.bizEmailAddress}`} className='email-n-phone-link' > {data.bizEmailAddress}</a>
+                                </div>)
+                            }
                         </div>
                     </div>
 
@@ -1088,3 +1085,6 @@ const icons = [
 ];
 
 
+//<div className='col-12 email-n-phone-2' >
+//    <FiPhoneCall style={{ fontSize: `21px` }} /> <a href={`tel:${data.bizPhoneNumber}`} className='email-n-phone-link' >{data.bizPhoneNumber}</a>
+//</div>
