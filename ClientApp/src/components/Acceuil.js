@@ -409,7 +409,7 @@ export default function Accueil() {
                                             {
                                                 model.items.map((item, i) => (
 
-                                                    <div className='col-12 col-md-6 col-lg-4 col-xl-3 top-item-container'>
+                                                    <div key={i} className='col-12 col-md-6 col-lg-4 col-xl-3 top-item-container'>
                                                         <Link to={`/biz/${city}/${item.id}`} >
                                                             <span className='home-top-item-name'>{item.businessName}</span>
                                                             <div className='top-item' style={{ backgroundImage: `url(${item.urlsPictures[0]})` }} >
@@ -583,7 +583,7 @@ export default function Accueil() {
                         <div className='row justify-content-center random-categories-row'>
                             <div className='col-12'>
                                 <h2 className='text-center title-1'>
-                                    Tous les business essentiels de votre ville sont sur Yaillo !
+                                    Les business essentiels dans votre ville sont sur Yaillo !
                           </h2>
                                 <br />
                                 <br />
@@ -611,7 +611,7 @@ export default function Accueil() {
                                     <br />
                                     Les professionnels de votre région
                                 <br />
-                                    sont présent aussi sur Yaillo !
+                                    sont aussi présent sur Yaillo !
                               <br />
                                     <br />
                                 </div>

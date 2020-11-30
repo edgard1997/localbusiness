@@ -59,11 +59,18 @@ export default function Search() {
         inTheTown: false,
         inTheCity: false
     });
-    const [coords, setCoords] = useState({ lat: 0, long: 0 });
-    const [popoverOpen, setPopoverOpen] = useState(false);
+
+    //const [coords, setCoords] = useState({ lat: 0, long: 0 });
+    //const [popoverOpen, setPopoverOpen] = useState(false);
+    //const togglePopover = () => { setPopoverOpen(!popoverOpen); }
     const [places, setPlaces] = useState([{ title: 'default', lat: 0, long: 0, sponsored:false, home:false }]);
 
-    const togglePopover = () => { setPopoverOpen(!popoverOpen); }
+
+    function scrollTop() {
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    }
 
     useEffect(() => {
 
@@ -274,6 +281,7 @@ export default function Search() {
             return;
 
         filterData(value, toSkip);
+        scrollTop();
 
 }
 
@@ -363,6 +371,8 @@ export default function Search() {
                     setReady(true);
                 }).catch(error => console.log(error));
         }
+
+        scrollTop();
 
     }
 
@@ -462,40 +472,6 @@ export default function Search() {
        
     }
 
-    //function Item3() {
-
-
-    //    return (
-    //        <div className='col-11 col-sm-6 col-md-6 item-search-container'>
-                
-    //            <h5 >Le Marylin's</h5>
-    //            <div style={{ cursor: `pointer` }} >
-    //                <div className='item-search' style={{ 'backgroundImage': `url(${''})` }} >
-    //                </div>
-    //                <div className='row'>
-    //                    <div className='col-4 col-sm-3 col-md-4 col-lg-4'>
-    //                        <Rating
-    //                            name="read-only"
-    //                            value={0}
-    //                            precision={0.5}
-    //                            readOnly
-    //                            className='biz-hightlight-rating-1'
-    //                        />
-    //                    </div>
-    //                    <div className='col-3 col-sm-2'>
-    //                        <span className='biz-hightlight-reviews-1' >0</span>
-    //                    </div>
-    //                    <div className='col-12'>
-    //                        <ImLocation className="street-location-icon" />
-    //                            <span className='street-location'>85 Rue Dominique Savio Primaire, Bonapriso</span>
-    //                    </div>
-
-    //                </div>
-    //            </div>
-    //        </div>);
-
-
-    //}
 
     return (
         <>

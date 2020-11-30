@@ -29,7 +29,7 @@ export default function Business() {
                         <li>Pour plus de détails veuillez nous contacter via WhatsApp <b>(+380669310540)</b>.</li>
                     </ul>
                     <p className='mention-text' >
-                       Notez la procédure de vérification peut durer jusqu'à 48 heures. Nous vous notifierons une fois celle-ci terminée.
+                       Notez que la procédure de vérification peut durer jusqu'à 48 heures. Nous vous notifierons une fois celle-ci terminée.
                     </p>
                 </div>
             </div>
