@@ -280,8 +280,9 @@ export default function Search() {
         if (value === currentPage)
             return;
 
-        filterData(value, toSkip);
         scrollTop();
+        filterData(value, toSkip);
+   
 
 }
 
@@ -299,6 +300,8 @@ export default function Search() {
 
         if (value === currentPage)
             return;
+
+        scrollTop();
 
         setReady(false);
         if (params.category === 0) {
@@ -371,8 +374,6 @@ export default function Search() {
                     setReady(true);
                 }).catch(error => console.log(error));
         }
-
-        scrollTop();
 
     }
 
