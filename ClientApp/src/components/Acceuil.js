@@ -33,6 +33,7 @@ import { Link, useParams } from 'react-router-dom';
 import { useDataContext } from './Global/GlobalContext';
 import authService from './api-authorization/AuthorizeService';
 import { GetApi } from '../api/ApiConstants';
+import { GrCheckboxSelected } from 'react-icons/gr';
 
 
 export default function Accueil() {
@@ -186,13 +187,13 @@ export default function Accueil() {
     },
     {
         id: 4,
-        title: "Hotels et Appartements",
+        title: "Hôtels et Appartements",
         image: 'https://st6808.ispot.cc/media/hotel.jpg',
         link: `/recherche/${city}/5/0/default`
     },
     {
         id: 5,
-        title: "Laveries",
+        title: "Lavage auto",
         image: 'https://st6808.ispot.cc/media/carwash.jpg',
         link: `/recherche/${city}/48/0/default`
     },
@@ -664,7 +665,7 @@ function ProCard(props) {
                         <div className='col-12 pro-card-info'>
                             <span className='item-pro-title'>{props.pro.title}</span>
                             <br />
-                            <span className='item-pro-number'>{props.pro.number}</span>
+
                         </div>
                     </div>
                 </a>
@@ -672,7 +673,7 @@ function ProCard(props) {
         </div>
     );
 }
-
+//<span className='item-pro-number'>{props.pro.number}</span>
 
 export function CategoriesModal(props) {
 
@@ -697,7 +698,7 @@ export function CategoriesModal(props) {
                             <span><a href={`/recherche/${city}/4/0/default`} ><FaCocktail className='business-icon biz-icon-4' /> Snack-Bar & Boîtes de nuit</a></span>
                             <br />
                             <br />
-                            <span><a href={`/recherche/${city}/5/0/default`} ><BsBuilding className='business-icon biz-icon-5' /> Hotels & Appartements</a></span>
+                            <span><a href={`/recherche/${city}/5/0/default`} ><BsBuilding className='business-icon biz-icon-5' /> Hôtels & Appartements</a></span>
                             <br />
                             <br />
                             <span><a href={`/recherche/${city}/6/0/default`} ><FaVolleyballBall className='business-icon biz-icon-6' /> Art & Divertissement</a></span>
@@ -811,7 +812,7 @@ export function CategoriesModal(props) {
                             <span><a href={`/recherche/${city}/19/0/default`} ><BiCodeAlt className='business-icon biz-icon-10' /> Développeurs Web & Mobile</a></span>
                             <br />
                             <br />
-                            <span><a href={`/recherche/${city}/48/0/default`} ><AiFillCar className='business-icon biz-icon-1' /> Laveries</a></span>
+                            <span><a href={`/recherche/${city}/48/0/default`} ><AiFillCar className='business-icon biz-icon-1' /> Lavage auto</a></span>
                             <br />
                             <br />
                             <span><a href={`/recherche/${city}/49/0/default`} ><BiCalendarStar className='business-icon biz-icon-2' /> Événements</a></span>
@@ -839,6 +840,9 @@ export function CategoriesModal(props) {
                             <br />
                             <br />
                             <span><a href={`/recherche/${city}/22/0/default`} ><MdKeyboardVoice className='business-icon biz-icon-10' /> Beatmaking & enregistrement</a></span>
+                            <br />
+                            <br />
+                            <span><a href={`/recherche/${city}/51/0/default`} ><GrCheckboxSelected className='business-icon biz-icon-2' /> Manutention</a></span>
                             <br />
                             <br />
                         </div>

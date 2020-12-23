@@ -1,4 +1,4 @@
-﻿export const baseUrl = "https://yaillo.com"; /// "https://localhost:44313"; //"http://192.168.1.145:19000"; 
+﻿export const baseUrl = "https://localhost:44313"; //// "https://yaillo.com";  /// "https://localhost:44313"; //"http://192.168.1.145:19000"; 
 
 export function redirectTo(url) {
      window.location.replace(url);

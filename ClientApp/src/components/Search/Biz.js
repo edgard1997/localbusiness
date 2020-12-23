@@ -31,6 +31,8 @@ import authService from '../api-authorization/AuthorizeService';
 import { TileLayer, Marker, Popup, MapContainer } from 'react-leaflet';
 import L from 'leaflet';
 import { GoVerified } from 'react-icons/go';
+import MapBoxGLLayer from "./MapBoxLayer";
+import { MAPBOX_ACCESS_TOKEN } from "./Search";
 
 export default function Biz() {
 
@@ -468,10 +470,11 @@ export default function Biz() {
 
 
         return (<MapContainer center={location} zoom={11}>
-                <TileLayer
-                    attribution='&amp;copy <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
+            <MapBoxGLLayer
+                accessToken={MAPBOX_ACCESS_TOKEN}
+                style="mapbox://styles/mapbox/streets-v9"
+                attribution="Map data &copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors, Imagery © <a href='https://www.mapbox.com/'>Mapbox</a>"
+            />
                 <Marker position={home} icon={homeIcon}  >
             <Popup>
                    Votre position
@@ -631,7 +634,7 @@ export default function Biz() {
                                     {currentGallery.map((img, i) => (<PhotoCard key={i} index={i} img={img} />))}
                                 </div>
                                 <div className='row gallery-grid-pagination'>
-                                    <div className='col-8' >
+                                    <div className='col-12 col-md-8' >
                                         <Pagination count={pages} shape="rounded" page={currentPage} onChange={changePage} />
                                     </div>
                                 </div>

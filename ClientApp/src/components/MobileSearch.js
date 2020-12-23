@@ -2,7 +2,7 @@
 import { Container } from "reactstrap";
 import { Link, useParams } from "react-router-dom";
 import { Button, IconButton, Icon, Avatar, Badge } from "@material-ui/core";
-import { GrFormDown } from "react-icons/gr";
+import { GrFormDown, GrCheckboxSelected } from "react-icons/gr";
 import { FiLogOut, FiBell, FiUser, FiStar, FiSearch } from "react-icons/fi";
 import { BsSearch, BsBuilding } from "react-icons/bs";
 import "./MobileSearch.css";
@@ -214,7 +214,7 @@ export default function MobileSearch() {
                         <span><a href={`/recherche/${city}/4/0/default`} ><FaCocktail className='business-icon biz-icon-4' /> Snack-Bar & Boîtes de nuit</a></span>
                         <br />
                         <br />
-                        <span><a href={`/recherche/${city}/5/0/default`} ><BsBuilding className='business-icon biz-icon-5' /> Hotels & Appartements</a></span>
+                        <span><a href={`/recherche/${city}/5/0/default`} ><BsBuilding className='business-icon biz-icon-5' /> Hôtels & Appartements</a></span>
                         <br />
                         <br />
                         <span><a href={`/recherche/${city}/6/0/default`} ><FaVolleyballBall className='business-icon biz-icon-6' /> Art & Divertissement</a></span>
@@ -328,7 +328,7 @@ export default function MobileSearch() {
                         <span><a href={`/recherche/${city}/19/0/default`} ><BiCodeAlt className='business-icon biz-icon-10' /> Développeurs Web & Mobile</a></span>
                         <br />
                         <br />
-                        <span><a href={`/recherche/${city}/48/0/default`} ><AiFillCar className='business-icon biz-icon-1' /> Laveries</a></span>
+                        <span><a href={`/recherche/${city}/48/0/default`} ><AiFillCar className='business-icon biz-icon-1' /> Lavage auto</a></span>
                         <br />
                         <br />
                         <span><a href={`/recherche/${city}/49/0/default`} ><BiCalendarStar className='business-icon biz-icon-2' /> Événements</a></span>
@@ -356,6 +356,9 @@ export default function MobileSearch() {
                         <br />
                         <br />
                         <span><a href={`/recherche/${city}/22/0/default`} ><MdKeyboardVoice className='business-icon biz-icon-10' /> Beatmaking & enregistrement</a></span>
+                        <br />
+                        <br />
+                        <span><a href={`/recherche/${city}/51/0/default`} ><GrCheckboxSelected className='business-icon biz-icon-2' /> Manutention</a></span>
                         <br />
                         <br />
                     </div>

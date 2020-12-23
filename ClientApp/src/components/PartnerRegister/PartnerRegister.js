@@ -544,7 +544,7 @@ const businessTypes = [
     'Shopping',
     'Epicerie',
     'Snack-Bar & Boite de nuit',
-    'Hotel & Appartement',
+    'Hôtel & Appartement',
     'Art & Divertissement',
     'Salle de fête',
     'Mécano-automobile',
@@ -587,8 +587,9 @@ const businessTypes = [
     'Réparateur Informatique',
     'Réparateur Smartphones',
     'Cordonnerie',
-    'Laverie',
+    'Lavage auto',
     'Événementiel',
-    'Expert en Marketing'
+    'Expert en Marketing',
+    'Manutention'
 ];
 

@@ -17,6 +17,7 @@ import { useDataContext } from '../Global/GlobalContext';
 import { FiFilter } from 'react-icons/fi';
 import { TileLayer, Marker, Popup, MapContainer } from 'react-leaflet';
 import L from 'leaflet';
+import MapBoxGLLayer from "./MapBoxLayer";
 
 
 
@@ -683,7 +684,7 @@ export default function Search() {
                                     <a href={`/recherche/${city}/44/0/default`} className='top-category-link'>Réparateurs de TV</a>
                                 </div>
                                 <div className='top-category-div'>
-                                    <a href={`/recherche/${city}/48/0/default`} className='top-category-link'>Laveries</a>
+                                    <a href={`/recherche/${city}/48/0/default`} className='top-category-link'>Lavage auto</a>
                                 </div>
                                 <div className='top-category-div'>
                                     <a href={`/recherche/${city}/46/0/default`} className='top-category-link'>Réparateurs de smartphones</a>
@@ -751,7 +752,7 @@ export default function Search() {
                                                 {data.items.map((biz, i) => (<Item2 key={i} biz={biz} premium={false} />))}
                                             </div>
                                             {pages > 1 ? <div className='row search-pagination'>
-                                                <div className='col-8 col-sm-8 col-md-6 col-lg-6 col-xl-6' >
+                                                <div className='col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6' >
                                                     {filtered ? <Pagination count={pages} shape="rounded" page={currentPage} onChange={changePageWithFilter} /> : <Pagination count={pages} shape="rounded" page={currentPage} onChange={changePage} />}
                                                 </div>
                                             </div> : null}
@@ -835,11 +836,12 @@ function YailloMap(props) {
     const cityPointer = [city.lat, city.long];
 
     return (
-        props.items.length > 1 ? (<MapContainer center={cityPointer} zoom={11} >
-            <TileLayer
-                attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
+        props.items.length > 1 ? (<MapContainer center={cityPointer} zoom={12} >
+            <MapBoxGLLayer
+                accessToken={MAPBOX_ACCESS_TOKEN}
+                style="mapbox://styles/mapbox/streets-v9"
+                attribution="Map data &copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors, Imagery © <a href='https://www.mapbox.com/'>Mapbox</a>"
+       />
             {props.items.map((item, i) => {
 
                 if (i === 0)
@@ -865,7 +867,7 @@ const businessTypes = [
     'Shopping',
     'Epicerie',
     'Snack-Bar & Boîtes de nuit',
-    'Hotels & Appartement',
+    'Hôtels & Appartement',
     'Art & Divertissement',
     'Salles de fête',
     'Mécano-automobile',
@@ -908,9 +910,10 @@ const businessTypes = [
     'Réparateurs Informatique',
     'Réparateurs Smartphones',
     'Cordonneries',
-    'Laveries',
+    'Lavage auto',
     'Événementiel',
-    'Experts en Marketing'
+    'Experts en Marketing',
+    'Manutention'
 ];
 
 function getCityLocation(city) {
@@ -933,27 +936,36 @@ function getCityLocation(city) {
 }
 
 const cities = [{ name: "abidjan", lat: 5.352544812365578, long: -4.004860745800187 },
-    { name: "bouake", lat: 7.688339564187033, long: -5.036736179883731 } ,
-    { name: "yamoussoukro", lat: 6.809840489751288, long: -5.269894608870574 },
-    { name: "khorogo", lat: 9.456735048100457, long: -5.629878608479587 },
-    { name: "dakar", lat: 14.717323095145671, long: -17.454154516856853 },
-    { name: "conakry", lat: 9.633541195419113, long: -13.590319948600932 },
-    { name: "bamako", lat: 12.642599566899445, long: -7.991114659917241 },
-    { name: "lome", lat: 6.1613624058397205, long: 1.2405892790508868 } ,
-    { name: "ouagadougou", lat: 12.370220648256087, long: -1.5200229922878434 },
-    { name: "cotonou", lat: 6.36692048301572, long: 2.396236703126107 },
-    { name: "porto-novo", lat: 6.493903477075459, long: 2.625388474194161 },
-    { name: "abomey-calavi", lat: 6.452623721933518, long: 2.3450767966156008 },
-    { name: "libreville", lat: 0.4193636987434619, long: 9.435227890895845 },
-    { name: "oyem", lat: 1.6018101380486647, long: 11.572948490543434 },
-    { name: "brazzaville", lat: -4.272004588889839, long: 15.266660387745482 },
-    { name: "pointe-noire", lat: -4.792116273556241, long: 11.883170453105757 },
-    { name: "kinshasa", lat: -4.34952422572521, long: 15.301026987861722 },
-    { name: "lumumbashi", lat: -11.661545500645262, long: 27.49008611213785 },
-    { name: "douala", lat: 4.062305083946346, long: 9.703938593214488 },
-    { name: "yaounde", lat: 3.8673403875822707, long: 11.517274159192299 },
-    { name: "garoua", lat: 9.330864539426793, long: 13.39450055250033 },
-    { name: "bafoussam", lat: 5.47753450256532, long: 10.416055375634397},
-    { name: "limbe", lat: 4.02097404086149, long: 9.18596491957453 },
-    { name: "kribi", lat: 2.939890512370546, long: 9.908058513480249 },
-]
+{ name: "bouake", lat: 7.688339564187033, long: -5.036736179883731 },
+{ name: "yamoussoukro", lat: 6.809840489751288, long: -5.269894608870574 },
+{ name: "khorogo", lat: 9.456735048100457, long: -5.629878608479587 },
+{ name: "dakar", lat: 14.717323095145671, long: -17.454154516856853 },
+{ name: "conakry", lat: 9.633541195419113, long: -13.590319948600932 },
+{ name: "bamako", lat: 12.642599566899445, long: -7.991114659917241 },
+{ name: "lome", lat: 6.1613624058397205, long: 1.2405892790508868 },
+{ name: "ouagadougou", lat: 12.370220648256087, long: -1.5200229922878434 },
+{ name: "cotonou", lat: 6.36692048301572, long: 2.396236703126107 },
+{ name: "porto-novo", lat: 6.493903477075459, long: 2.625388474194161 },
+{ name: "abomey-calavi", lat: 6.452623721933518, long: 2.3450767966156008 },
+{ name: "libreville", lat: 0.4193636987434619, long: 9.435227890895845 },
+{ name: "oyem", lat: 1.6018101380486647, long: 11.572948490543434 },
+{ name: "brazzaville", lat: -4.272004588889839, long: 15.266660387745482 },
+{ name: "pointe-noire", lat: -4.792116273556241, long: 11.883170453105757 },
+{ name: "kinshasa", lat: -4.34952422572521, long: 15.301026987861722 },
+{ name: "lumumbashi", lat: -11.661545500645262, long: 27.49008611213785 },
+{ name: "douala", lat: 4.062305083946346, long: 9.703938593214488 },
+{ name: "yaounde", lat: 3.8673403875822707, long: 11.517274159192299 },
+{ name: "garoua", lat: 9.330864539426793, long: 13.39450055250033 },
+{ name: "bafoussam", lat: 5.47753450256532, long: 10.416055375634397 },
+{ name: "limbe", lat: 4.02097404086149, long: 9.18596491957453 },
+{ name: "kribi", lat: 2.939890512370546, long: 9.908058513480249 },
+];
+
+export const MAPBOX_ACCESS_TOKEN = "pk.eyJ1IjoiaGFuZ2JhbmplYW5lZGdhcmQiLCJhIjoiY2tpcHNldnJxMDh2aDJ5cnhndWNkbTI5eiJ9.gr5pG0flg7ZdyrgzdVRvSg";
+
+
+ //<TileLayer
+               // attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                //url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                //url="https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaGFuZ2JhbmplYW5lZGdhcmQiLCJhIjoiY2tpcHNldnJxMDh2aDJ5cnhndWNkbTI5eiJ9.gr5pG0flg7ZdyrgzdVRvSg"
+           // />

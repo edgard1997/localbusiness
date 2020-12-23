@@ -42,7 +42,9 @@ export function LogoBar() {
                 <div className='row justify-content-center'>
                     <div className='col-12'>
                         <h4 className='text-center'>
-                            <img className='app-logo-img' src={`${yaillo}`} />
+                            <a href="/">
+                                <img className='app-logo-img' src={`${yaillo}`} />
+                            </a>
                         </h4>
                     </div>
                 </div>
